@@ -1,0 +1,174 @@
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+
+local leanloader = Instance.new("ScreenGui")
+local main = Instance.new("Frame")
+local name = Instance.new("TextLabel")
+local namelogo = Instance.new("ImageLabel")
+local randomlogo = Instance.new("ImageLabel")
+local main1 = Instance.new("Frame")
+local main1_2 = Instance.new("ImageLabel")
+local TextButton = Instance.new("TextButton")
+
+leanloader.Name = "leanloader"
+leanloader.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+leanloader.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+main.Name = "main"
+main.Parent = leanloader
+main.BackgroundColor3 = Color3.fromRGB(49, 32, 84)
+main.BorderColor3 = Color3.fromRGB(255, 0, 242)
+main.Position = UDim2.new(0.268680453, 0, 0.118292682, 0)
+main.Size = UDim2.new(0, 389, 0, 249)
+
+name.Name = "name"
+name.Parent = main
+name.BackgroundColor3 = Color3.fromRGB(49, 32, 84)
+name.BorderColor3 = Color3.fromRGB(255, 0, 242)
+name.Position = UDim2.new(0, 0, 0.0101351449, 0)
+name.Size = UDim2.new(0, 389, 0, 42)
+name.Font = Enum.Font.Michroma
+name.Text = "leanloader"
+name.TextColor3 = Color3.fromRGB(255, 255, 255)
+name.TextScaled = true
+name.TextSize = 14.000
+name.TextWrapped = true
+
+namelogo.Name = "namelogo"
+namelogo.Parent = name
+namelogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+namelogo.BackgroundTransparency = 1.000
+namelogo.BorderColor3 = Color3.fromRGB(255, 0, 242)
+namelogo.Position = UDim2.new(0.722556949, 0, -0.0724002942, 0)
+namelogo.Size = UDim2.new(0, 66, 0, 57)
+namelogo.Image = "rbxassetid://10945175578"
+
+randomlogo.Name = "randomlogo"
+randomlogo.Parent = main
+randomlogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+randomlogo.BorderColor3 = Color3.fromRGB(255, 0, 242)
+randomlogo.Position = UDim2.new(-0.203084841, 0, 0.368506283, 0)
+randomlogo.Size = UDim2.new(0, 73, 0, 64)
+randomlogo.Image = "rbxassetid://8964897091"
+
+main1.Name = "main1"
+main1.Parent = main
+main1.BackgroundColor3 = Color3.fromRGB(13, 10, 33)
+main1.BorderColor3 = Color3.fromRGB(255, 0, 242)
+main1.Position = UDim2.new(0.0161240809, 0, 0.223890379, 0)
+main1.Size = UDim2.new(0, 375, 0, 186)
+
+main1_2.Name = "main1"
+main1_2.Parent = main1
+main1_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+main1_2.BackgroundTransparency = 1.000
+main1_2.Position = UDim2.new(-0.00324250804, 0, -0.000906825066, 0)
+main1_2.Size = UDim2.new(0, 377, 0, 186)
+main1_2.Image = "rbxassetid://3531929815"
+main1_2.ImageTransparency = 0.900
+
+TextButton.Parent = main1
+TextButton.BackgroundColor3 = Color3.fromRGB(13, 10, 33)
+TextButton.BorderColor3 = Color3.fromRGB(255, 0, 242)
+TextButton.Position = UDim2.new(0.215999991, 0, 0.408602178, 0)
+TextButton.Size = UDim2.new(0, 214, 0, 34)
+TextButton.Font = Enum.Font.Michroma
+TextButton.Text = "load shit"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextWrapped = true
+
+local function RDPVHS_fake_script()
+	local script = Instance.new('LocalScript', main)
+
+	local UserInputService = game:GetService("UserInputService")
+	local runService = (game:GetService("RunService"));
+	
+	local gui = script.Parent
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	function Lerp(a, b, m)
+		return a + (b - a) * m
+	end;
+	
+	local lastMousePos
+	local lastGoalPos
+	local DRAG_SPEED = (8);
+	function Update(dt)
+		if not (startPos) then return end;
+		if not (dragging) and (lastGoalPos) then
+			gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, lastGoalPos.X.Offset, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, lastGoalPos.Y.Offset, dt * DRAG_SPEED))
+			return 
+		end;
+	
+		local delta = (lastMousePos - UserInputService:GetMouseLocation())
+		local xGoal = (startPos.X.Offset - delta.X);
+		local yGoal = (startPos.Y.Offset - delta.Y);
+		lastGoalPos = UDim2.new(startPos.X.Scale, xGoal, startPos.Y.Scale, yGoal)
+		gui.Position = UDim2.new(startPos.X.Scale, Lerp(gui.Position.X.Offset, xGoal, dt * DRAG_SPEED), startPos.Y.Scale, Lerp(gui.Position.Y.Offset, yGoal, dt * DRAG_SPEED))
+	end;
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			lastMousePos = UserInputService:GetMouseLocation()
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	runService.Heartbeat:Connect(Update)
+end
+coroutine.wrap(RDPVHS_fake_script)()
+local function KKNDHAJ_fake_script()
+	local script = Instance.new('LocalScript', TextButton)
+
+	script.Parent.MouseButton1Down:Connect(function()
+		script.Parent.Parent.Parent:Destroy()
+		wait(0.4)
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+		--here ur loadstring or script
+	end)
+end
+coroutine.wrap(KKNDHAJ_fake_script)()
+
+
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
+--loader ui made by: 1161 !$lua#1161
